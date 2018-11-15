@@ -1,10 +1,15 @@
 version: "3"
+volumes:
+  # MongoDB data volume        
+  volume_mongo:
+    driver: local
+
 services:
   # MongoDB
   mongo:
     image: mongo
     volumes:
-      - ./data:/data/db
+      - volume_mongo:/data/db
 
   # BaaS API Server
   api:
