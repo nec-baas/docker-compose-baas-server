@@ -9,8 +9,9 @@ NEC モバイルバックエンド基盤 サーバ一式を Docker Compose で
 
 以下二種類の定義ファイルを用意しています。
 
-* simple: MongoDB, BaaS API Server, BaaS Console Server
-* full: simple に加え、RabbitMQ Server, SSE Push Server, Cloud Functions Server を含む
+* simple: MongoDB, BaaS API server, BaaS Console server
+* full: simple に加え、RabbitMQ server, fluend server,
+  SSE Push server, Cloud Functions server を含む
 
 simple, full いずれかのディレクトリに移動し、以下コマンドで起動します。
 

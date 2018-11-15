@@ -18,6 +18,15 @@ services:
       - RABBITMQ_DEFAULT_USER=rabbitmq
       - RABBITMQ_DEFAULT_PASS=rabbitmq
 
+  # Fluentd
+  fluentd:
+    image: necbaas/baas-fluentd
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_HOST=mongo
+      - CAPPED_SIZE=128m
+
   # BaaS API Server
   api:
     image: necbaas/api-server
@@ -26,9 +35,11 @@ services:
     depends_on:
       - mongo
       - rabbit
+      - fluentd
     environment:
       - MONGO_SERVERS=mongodb://mongo:27017
       - AMQP_URI=amqp://rabbitmq:rabbitmq@rabbit:5672
+      - LOG_FLUENT_HOST=fluentd
 
   # BaaS Console Server
   console:
@@ -38,9 +49,11 @@ services:
     depends_on:
       - mongo
       - rabbit
+      - fluentd
     environment:
       - MONGO_SERVERS=mongodb://mongo:27017
       - AMQP_URI=amqp://rabbitmq:rabbitmq@rabbit:5672
+      - LOG_FLUENT_HOST=fluentd
 
   # SSE Push Server
   ssepush:
@@ -57,5 +70,7 @@ services:
     image: necbaas/cloudfn-server
     depends_on:
       - rabbit
+      - fluentd
     environment:
       - AMQP_URI=amqp://rabbitmq:rabbitmq@rabbit:5672
+      - LOG_FLUENT_HOST=fluentd
