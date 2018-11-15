@@ -7,15 +7,19 @@ NEC モバイルバックエンド基盤 サーバ一式を Docker Compose で
 使い方
 ======
 
-以下二種類の定義ファイルを用意しています。
-
-* simple: MongoDB, BaaS API server, BaaS Console server
-* full: simple に加え、RabbitMQ server, fluend server,
-  SSE Push server, Cloud Functions server を含む
-
-simple, full いずれかのディレクトリに移動し、以下コマンドで起動します。
+以下コマンドで全サーバを起動します。
 
     $ docker-compose up -d
+
+ここで起動されるサーバは以下のものになります。
+
+* MongoDB サーバ
+* RabbitMQ サーバ
+* fluentd サーバ
+* BaaS API サーバ
+* BaaS Console サーバ
+* BaaS SSE Push サーバ
+* BaaS Cloud Functions サーバ
 
 停止する場合は以下の通りです。
 
@@ -28,3 +32,11 @@ simple, full いずれかのディレクトリに移動し、以下コマンド�
 * ssepush-server: http://localhost:8082/ssepush/
 
 MongoDB のデータは data volume に保存されます。
+
+簡易版について
+==============
+
+simple/docker-compose.yml に簡易版の定義ファイルを用意しています。
+
+こちらの定義ファイルでは、MongoDBサーバ、BaaS APIサーバ、BaaS Consoleサーバの
+３つだけが起動されます。
