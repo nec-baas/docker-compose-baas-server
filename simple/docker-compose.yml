@@ -1,0 +1,27 @@
+version: "3"
+services:
+  # MongoDB
+  mongo:
+    image: mongo
+    volumes:
+      - ./data:/data/db
+
+  # BaaS API Server
+  api:
+    image: necbaas/api-server
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_SERVERS=mongodb://mongo:27017
+
+  # BaaS Console Server
+  console:
+    image: necbaas/console-server
+    ports:
+      - 8081:8080
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_SERVERS=mongodb://mongo:27017
