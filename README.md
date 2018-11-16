@@ -28,7 +28,7 @@ NEC モバイルバックエンド基盤 サーバ一式を Docker Compose で
 各サーバの URL は以下の通りです。
 
 * api-server: http://localhost:8080/api/
-* console-server: http://localhost:8081/console/
+* console-server: http://localhost:8080/console/
 * ssepush-server: http://localhost:8082/ssepush/
 
 MongoDB のデータは data volume に保存されます。
